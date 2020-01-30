@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost/Eclipse/servicioWeb/directorioWsdl/MiWsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MiWsdl" targetNamespace="http://localhost/Eclipse/servicioWeb/directorioWsdl/MiWsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://localhost/Eclipse/servicioWeb/directorioWsdl/MiWsdl/">
+      <xsd:element name="informacionActualServer">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="mensaje" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="informacionActualServerResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="informacionActualServerRequest">
+    <wsdl:part element="tns:informacionActualServer" name="mensaje"/>
+  </wsdl:message>
+  <wsdl:message name="informacionActualServerResponse">
+    <wsdl:part element="tns:informacionActualServerResponse" name="out"/>
+  </wsdl:message>
+  <wsdl:portType name="MiWsdl">
+    <wsdl:operation name="informacionActualServer">
+      <wsdl:input message="tns:informacionActualServerRequest"/>
+      <wsdl:output message="tns:informacionActualServerResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MiWsdlSOAP" type="tns:MiWsdl">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="informacionActualServer">
+      <soap:operation soapAction="http://localhost/Eclipse/servicioWeb/directorioWsdl/MiWsdl/informacionActualServer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MiWsdl">
+    <wsdl:port binding="tns:MiWsdlSOAP" name="MiWsdlSOAP">
+      <soap:address location="http://localhost/Eclipse/servicioWeb/serverSOAP.php"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
